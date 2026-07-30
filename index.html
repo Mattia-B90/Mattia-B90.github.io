@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mattia Borchi — Product Manager, Technical</title>
+<meta name="description" content="Mattia Borchi — Senior Product Manager, technical background in mechatronics, working in coffee manufacturing across European markets.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #14161A;
+    --panel: #1B1E23;
+    --panel-alt: #21252B;
+    --line: #3A3F47;
+    --line-soft: #262A31;
+    --text: #E8E6DF;
+    --text-dim: #9CA0A6;
+    --accent: #E8A33D;
+    --accent-teal: #6FA8A0;
+    --radius: 2px;
+  }
+
+  *{ box-sizing: border-box; margin: 0; padding: 0; }
+
+  html{ scroll-behavior: smooth; }
+
+  body{
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection{ background: var(--accent); color: #14161A; }
+
+  a{ color: inherit; }
+
+  :focus-visible{
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  .mono{ font-family: 'JetBrains Mono', monospace; }
+
+  h1, h2, h3{
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  .wrap{
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  .label{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+
+  /* ---------- ruler / tick edges ---------- */
+  .ruler{
+    height: 22px;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+    border-bottom: 1px solid var(--line);
+  }
+  .ruler .wrap{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+  .tick{
+    width: 1px;
+    height: 8px;
+    background: var(--line);
+  }
+  .tick.major{ height: 14px; background: var(--line); }
+
+  /* ---------- site header ---------- */
+  .sitehead{
+    padding: 18px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .sitehead .wrap{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .sitehead .mark{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--text-dim);
+  }
+  .sitehead nav{ display: flex; gap: 22px; }
+  .sitehead nav a{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    text-decoration: none;
+    transition: color .15s ease;
+  }
+  .sitehead nav a:hover{ color: var(--accent); }
+
+  /* ---------- hero / title block ---------- */
+  .hero{
+    padding: 56px 0 40px;
+  }
+
+  .titleblock{
+    border: 1px solid var(--line);
+    background: var(--panel);
+    position: relative;
+  }
+
+  .titleblock::before,
+  .titleblock::after{
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border: 1px solid var(--accent);
+    opacity: .6;
+  }
+  .titleblock::before{ top: -1px; left: -1px; border-right: none; border-bottom: none; }
+  .titleblock::after{ bottom: -1px; right: -1px; border-left: none; border-top: none; }
+
+  .titleblock-main{
+    padding: 40px 32px 32px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .titleblock-main .eyebrow{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+  .titleblock-main .eyebrow .dot{
+    width: 7px; height: 7px;
+    background: var(--accent);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .titleblock-main h1{
+    font-size: clamp(32px, 5.5vw, 52px);
+    line-height: 1.05;
+  }
+
+  .titleblock-main .role{
+    margin-top: 12px;
+    font-size: 17px;
+    color: var(--text-dim);
+    max-width: 54ch;
+  }
+
+  .titleblock-fields{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .field{
+    padding: 14px 18px;
+    border-right: 1px solid var(--line);
+  }
+  .field:last-child{ border-right: none; }
+  .field .label{ margin-bottom: 6px; }
+  .field .value{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+  }
+
+  /* signal trace divider */
+  .trace{
+    height: 46px;
+    margin: 8px 0 0;
+    opacity: .5;
+  }
+  .trace path{
+    fill: none;
+    stroke: var(--accent-teal);
+    stroke-width: 1.25;
+  }
+
+  /* ---------- section shell ---------- */
+  section{
+    padding: 64px 0;
+    border-bottom: 1px solid var(--line-soft);
+  }
+  section:last-of-type{ border-bottom: none; }
+
+  .section-head{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 28px;
+    gap: 16px;
+  }
+  .section-head h2{
+    font-size: 22px;
+  }
+  .section-head .tag{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    white-space: nowrap;
+  }
+
+  .lede{
+    max-width: 62ch;
+    color: var(--text-dim);
+    font-size: 15px;
+  }
+
+  /* ---------- thesis ---------- */
+  .thesis p{
+    font-size: 18px;
+    max-width: 60ch;
+    color: var(--text);
+  }
+  .thesis p + p{ margin-top: 16px; color: var(--text-dim); font-size: 16px; }
+
+  /* ---------- revision history (career) ---------- */
+  .revtable{
+    border: 1px solid var(--line);
+    background: var(--panel);
+  }
+  .revrow{
+    display: grid;
+    grid-template-columns: 64px 96px 1fr;
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .revrow:last-child{ border-bottom: none; }
+  .revrow > div{
+    padding: 18px 16px;
+    border-right: 1px solid var(--line-soft);
+  }
+  .revrow > div:last-child{ border-right: none; }
+  .rev-id{
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--accent);
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+  }
+  .rev-date{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--text-dim);
+    display: flex;
+    align-items: center;
+  }
+  .rev-desc .role-title{
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    margin-bottom: 4px;
+  }
+  .rev-desc p{
+    color: var(--text-dim);
+    font-size: 14px;
+  }
+
+  /* ---------- spec sheet (skills) ---------- */
+  .specgroup{ margin-bottom: 28px; }
+  .specgroup:last-child{ margin-bottom: 0; }
+  .specgroup .label{ margin-bottom: 10px; }
+  .specrow{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-top: 1px solid var(--line-soft);
+    padding: 10px 0;
+    gap: 12px;
+  }
+  .specrow:last-child{ border-bottom: 1px solid var(--line-soft); }
+  .specrow .k{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--text);
+  }
+  .specrow .v{
+    font-size: 13px;
+    color: var(--text-dim);
+  }
+
+  /* ---------- footer ---------- */
+  footer{ padding: 48px 0 64px; }
+  .footgrid{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+  .footlinks{
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .footlinks a{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12.5px;
+    color: var(--text-dim);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    padding-bottom: 2px;
+    transition: color .15s ease, border-color .15s ease;
+  }
+  .footlinks a:hover{ color: var(--accent); border-color: var(--accent); }
+  .foot-note{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    opacity: .7;
+  }
+
+  @media (max-width: 640px){
+    .titleblock-fields{ grid-template-columns: repeat(2, 1fr); }
+    .field:nth-child(2){ border-right: none; }
+    .field{ border-bottom: 1px solid var(--line); }
+    .field:nth-child(3), .field:nth-child(4){ border-bottom: none; }
+    .revrow{ grid-template-columns: 1fr; }
+    .revrow > div{ border-right: none; border-bottom: 1px solid var(--line-soft); }
+    .revrow > div:last-child{ border-bottom: none; }
+    .specrow{ grid-template-columns: 1fr; gap: 2px; }
+    .sitehead nav{ gap: 14px; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior: auto; }
+    *{ transition: none !important; animation: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="ruler">
+  <div class="wrap" id="ruler"></div>
+</div>
+
+<header class="sitehead">
+  <div class="wrap">
+    <span class="mark">MB / TECHNICAL INDEX</span>
+    <nav>
+      <a href="#thesis">Profile</a>
+      <a href="#path">Path</a>
+      <a href="#spec">Spec</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero" style="border-bottom:none; padding-bottom:0;">
+    <div class="titleblock">
+      <div class="titleblock-main">
+        <div class="eyebrow">
+          <span class="dot"></span>
+          <span class="label">Title Block — Sheet 1 of 1</span>
+        </div>
+        <h1>Mattia Borchi</h1>
+        <p class="role">Senior Product Manager working across coffee manufacturing equipment in global markets. Technical background in mechatronics, current focus on Python and statistics for product data analysis.</p>
+      </div>
+      <div class="titleblock-fields">
+        <div class="field">
+          <div class="label">Domain</div>
+          <div class="value">Coffee Mfg.</div>
+        </div>
+        <div class="field">
+          <div class="label">Base</div>
+          <div class="value">Germany</div>
+        </div>
+        <div class="field">
+          <div class="label">Origin</div>
+          <div class="value">Tuscany, IT</div>
+        </div>
+        <div class="field">
+          <div class="label">Rev</div>
+          <div class="value">D — 2026</div>
+        </div>
+      </div>
+    </div>
+
+    <svg class="trace" viewBox="0 0 920 46" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,30 L60,30 L75,10 L95,40 L115,18 L135,30 L200,30 L215,22 L235,32 L255,14 L280,30 L920,30" />
+    </svg>
+  </section>
+
+  <section id="thesis" class="thesis">
+    <div class="section-head">
+      <h2>Profile</h2>
+      <span class="tag mono">01 — Summary</span>
+    </div>
+    <p>I move product decisions from voice-of-customer to a launched product. My background is technical first — mechatronics training, a career that spans technical office roles through to technical product management — which means I work through specs, compliance requirements, and product data as a full member of the team, not from the outside.</p>
+    <p>I currently own product scope for coffee manufacturing equipment sold across global markets, and I'm building out Python and statistics as working tools for product decisions: demand curves, cohort behaviour, time series on field data.</p>
+  </section>
+
+  <section id="path">
+    <div class="section-head">
+      <h2>Career path</h2>
+      <span class="tag mono">Revision history</span>
+    </div>
+    <p class="lede" style="margin-bottom: 24px;">Each stage carried forward into the next. The product role runs on the operational and customer-facing experience before it, not instead of it.</p>
+
+    <div class="revtable">
+      <div class="revrow">
+        <div class="rev-id">REV A</div>
+        <div class="rev-date">2019–2021</div>
+        <div class="rev-desc">
+          <div class="role-title">Product Operations Specialist</div>
+          <p>Technical office role on coffee manufacturing equipment. Direct work with product data, BOM structures, ERP systems, labelling, and compliance documentation.</p>
+        </div>
+      </div>
+      <div class="revrow">
+        <div class="rev-id">REV B</div>
+        <div class="rev-date">2021–2022</div>
+        <div class="rev-desc">
+          <div class="role-title">Technical Product Coordinator</div>
+          <p>Coordinated technical product data and requirements across teams, building the bridge between engineering and the roles that came next.</p>
+        </div>
+      </div>
+      <div class="revrow">
+        <div class="rev-id">REV C</div>
+        <div class="rev-date">2022–2024</div>
+        <div class="rev-desc">
+          <div class="role-title">Technical Sales &amp; After-Sales</div>
+          <p>Customer-facing technical role for the German market. Translated field issues and customer requirements back into product and engineering terms.</p>
+        </div>
+      </div>
+      <div class="revrow">
+        <div class="rev-id">REV D</div>
+        <div class="rev-date">2025–present</div>
+        <div class="rev-desc">
+          <div class="role-title">Technical Product Manager</div>
+          <p>Full scope ownership: VOC through MRD/PRD to GTM, stage-gate delivery, compliance (CE/RoHS/REACH) as a product constraint, not an afterthought.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="spec">
+    <div class="section-head">
+      <h2>Spec sheet</h2>
+      <span class="tag mono">Transferable frameworks</span>
+    </div>
+
+    <div class="specgroup">
+      <div class="label">Product frameworks</div>
+      <div class="specrow"><div class="k">VOC → MRD → PRD</div><div class="v">Requirements chain from customer input to spec</div></div>
+      <div class="specrow"><div class="k">Stage-gate</div><div class="v">Phased delivery with defined exit criteria</div></div>
+      <div class="specrow"><div class="k">RICE / MoSCoW</div><div class="v">Prioritisation across competing scope</div></div>
+      <div class="specrow"><div class="k">GTM</div><div class="v">Launch planning tied to market and channel</div></div>
+    </div>
+
+    <div class="specgroup">
+      <div class="label">Engineering &amp; compliance</div>
+      <div class="specrow"><div class="k">BOM / ERP / SAP</div><div class="v">Structure and system fluency, not just sign-off</div></div>
+      <div class="specrow"><div class="k">PLM</div><div class="v">Lifecycle management, S-curve modelling</div></div>
+      <div class="specrow"><div class="k">CE / RoHS / REACH</div><div class="v">Compliance built into product scope</div></div>
+    </div>
+
+    <div class="specgroup">
+      <div class="label">Data &amp; analysis</div>
+      <div class="specrow"><div class="k">Python — pandas, NumPy</div><div class="v">Sales data simulation and analysis</div></div>
+      <div class="specrow"><div class="k">Time series</div><div class="v">ACF/PACF, Ljung-Box, cohort analysis</div></div>
+      <div class="specrow"><div class="k">Diffusion modelling</div><div class="v">Bass, logistic, Gompertz curves for product lifecycle</div></div>
+    </div>
+
+    <div class="specgroup">
+      <div class="label">Languages</div>
+      <div class="specrow"><div class="k">Italian</div><div class="v">Native</div></div>
+      <div class="specrow"><div class="k">English / German</div><div class="v">Working proficiency, daily use</div></div>
+    </div>
+  </section>
+
+  <footer id="contact">
+    <div class="footgrid">
+      <div>
+        <div class="label" style="margin-bottom: 10px;">Contact</div>
+        <div class="footlinks">
+          <a href="https://github.com/yourusername" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://www.linkedin.com/in/yourprofile" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="mailto:you@example.com">Email</a>
+          <a href="https://mattia-borchi.com" target="_blank" rel="noopener">mattia-borchi.com</a>
+        </div>
+      </div>
+      <div class="foot-note">Sheet 1/1 — Rev D — <span id="year"></span></div>
+    </div>
+  </footer>
+
+</main>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // build ruler ticks
+  const ruler = document.getElementById('ruler');
+  const count = 60;
+  for (let i = 0; i < count; i++){
+    const t = document.createElement('div');
+    t.className = 'tick' + (i % 5 === 0 ? ' major' : '');
+    ruler.appendChild(t);
+  }
+</script>
+
+</body>
+</html>
